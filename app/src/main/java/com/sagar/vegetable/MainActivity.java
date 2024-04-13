@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView result;
 
-    private int imageSize = 64;
+    private final int imageSize = 64;
 
     @SuppressLint("MissingInflatedId")
     @Override
