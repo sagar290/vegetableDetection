@@ -18,7 +18,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.sagar.vegetable.ml.VegDetection;
+import com.sagar.vegetable.ml.Model;
 
 import org.tensorflow.lite.DataType;
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer;
@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
         Bitmap scaledImage = Bitmap.createScaledBitmap(image, imageSize, imageSize, false);
 
         try {
-            VegDetection model = VegDetection.newInstance(getApplicationContext());
+            Model model = Model.newInstance(getApplicationContext());
 
             // Creates inputs for reference.
             TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 64, 64, 3}, DataType.FLOAT32);
@@ -122,9 +122,9 @@ public class MainActivity extends AppCompatActivity {
             for (int i = 0; i < imageSize; i++) {
                 for (int j = 0; j < imageSize; j++) {
                     int val = intValues[pixel++]; // RGB
-                    byteBuffer.putFloat(((val >> 16) & 0xFF) * (1.f / 255));
-                    byteBuffer.putFloat(((val >> 8) & 0xFF) * (1.f / 255));
-                    byteBuffer.putFloat((val & 0xFF) * (1.f / 255));
+                    byteBuffer.putFloat(((val >> 16) & 0xFF) * (1.f / 1));
+                    byteBuffer.putFloat(((val >> 8) & 0xFF) * (1.f / 1));
+                    byteBuffer.putFloat((val & 0xFF) * (1.f / 1));
                 }
             }
 
@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
             inputFeature0.loadBuffer(byteBuffer);
 
             // Runs model inference and gets result.
-            VegDetection.Outputs outputs = model.process(inputFeature0);
+            Model.Outputs outputs = model.process(inputFeature0);
             TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
 
             float[] confidences = outputFeature0.getFloatArray();
@@ -142,7 +142,48 @@ public class MainActivity extends AppCompatActivity {
 
             int predictedClass = argmax(confidences);
 
-            Log.println(Log.ASSERT, "MainActivity predictedClass", String.valueOf(predictedClass));
+            String[] classes = {
+                    "apple",
+                    "banana",
+                    "beetroot",
+                    "bell pepper",
+                    "cabbage",
+                    "capsicum",
+                    "carrot",
+                    "cauliflower",
+                    "chilli pepper",
+                    "corn",
+                    "cucumber",
+                    "eggplant",
+                    "garlic",
+                    "ginger",
+                    "grapes",
+                    "jalepeno",
+                    "kiwi",
+                    "lemon",
+                    "lettuce",
+                    "mango",
+                    "onion",
+                    "orange",
+                    "paprika",
+                    "pear",
+                    "peas",
+                    "pineapple",
+                    "pomegranate",
+                    "potato",
+                    "raddish",
+                    "soy beans",
+                    "spinach",
+                    "sweetcorn",
+                    "sweetpotato",
+                    "tomato",
+                    "turnip",
+                    "watermelon"
+            };
+
+            Log.println(Log.ASSERT, "MainActivity predictedClass", String.valueOf(predictedClass) + " of " + Arrays.toString(confidences));
+
+            result.setText(classes[predictedClass]);
 
             model.close();
         } catch (IOException e) {
@@ -150,10 +191,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private int argmax(float[][] array) {
+    private int argmax(float[] array) {
         int best = 0;
-        for (int i = 1; i < array[0].length; i++) {
-            if (array[0][i] > array[0][best]) {
+        for (int i = 1; i < array.length; i++) {
+            if (array[i] > array[best]) {
                 best = i;
             }
         }
