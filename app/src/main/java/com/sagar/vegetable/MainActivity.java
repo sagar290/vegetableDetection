@@ -2,6 +2,7 @@ package com.sagar.vegetable;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.media.ThumbnailUtils;
@@ -54,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
                     Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    cameraIntent.putExtra(MediaStore.EXTRA_SCREEN_ORIENTATION, ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
                     startActivityForResult(cameraIntent, 3);
                 } else {
                     requestPermissions(new String[]{Manifest.permission.CAMERA}, 100);
@@ -77,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
             if(requestCode == 3){
                 Bitmap image = (Bitmap) data.getExtras().get("data");
                 int dimension = Math.min(image.getWidth(), image.getHeight());
+
                 image = ThumbnailUtils.extractThumbnail(image, dimension, dimension);
 
                 imageView.setImageBitmap(image);
