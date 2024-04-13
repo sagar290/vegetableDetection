@@ -51,12 +51,12 @@ public class MainActivity extends AppCompatActivity {
 
         cameraButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 if (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
                     Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     startActivityForResult(cameraIntent, 3);
                 } else {
-                    requestPermissions(new String[]{Manifest.permission.CAMERA}, 1000);
+                    requestPermissions(new String[]{Manifest.permission.CAMERA}, 100);
                 }
             }
         });
@@ -73,8 +73,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if (resultCode == RESULT_OK) {
-            if (resultCode == 3) {
+        if(resultCode == RESULT_OK){
+            if(requestCode == 3){
                 Bitmap image = (Bitmap) data.getExtras().get("data");
                 int dimension = Math.min(image.getWidth(), image.getHeight());
                 image = ThumbnailUtils.extractThumbnail(image, dimension, dimension);
