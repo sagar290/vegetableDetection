@@ -137,9 +137,6 @@ public class MainActivity extends AppCompatActivity {
 
             float[] confidences = outputFeature0.getFloatArray();
 
-
-//            result.setText(maxPos);
-
             int predictedClass = argmax(confidences);
 
             String[] classes = {
@@ -181,7 +178,7 @@ public class MainActivity extends AppCompatActivity {
                     "watermelon"
             };
 
-            Log.println(Log.ASSERT, "MainActivity predictedClass", String.valueOf(predictedClass) + " of " + Arrays.toString(confidences));
+            // Log.println(Log.ASSERT, "MainActivity predictedClass", String.valueOf(predictedClass) + " of " + Arrays.toString(confidences));
 
             result.setText(classes[predictedClass]);
 
