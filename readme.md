@@ -9,7 +9,7 @@
 | Jannatul Ferdous  | 241160     |
 
 ## Introduction
-This project is a part of the course "Deep Learning" at the Jahangirnagar University. 
+This project is a part of the course "Deep Learning" at Jahangirnagar University. 
 The goal of this project is to detect vegetables in images. The dataset consists of 10 different classes of vegetables. 
 The dataset is split into a training and a test set. The training set contains 10,000 images and the test set contains 2,3115 images. 
 
