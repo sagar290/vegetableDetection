@@ -1,5 +1,13 @@
 # Vegetable Detection 
 
+## Group Members
+
+| Name | Roll |
+| -------- | -------- |
+| Sagar Dash | 241174     |
+| Md. Atiqur Rahman | 241172     |
+| Jannatul Ferdous  | 241160     |
+
 ## Introduction
 This project is a part of the course "Deep Learning" at the Jahangirnagar University. 
 The goal of this project is to detect vegetables in images. The dataset consists of 10 different classes of vegetables. 
