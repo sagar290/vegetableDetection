@@ -14,6 +14,7 @@ The goal of this project is to detect vegetables in images. The dataset consists
 The dataset is split into a training and a test set. The training set contains 10,000 images and the test set contains 2,3115 images. 
 
 [Vegetable Detection Dataset](https://www.kaggle.com/datasets/kritikseth/fruit-and-vegetable-image-recognition).
+
 [Python notebook code](https://drive.google.com/file/d/1juNew8NRYiCgJYy3KbBlBB6ZIbDlKLvb/view?usp=sharing)
 
 The dataset contains 36 classes of vegetables. The classes are:
